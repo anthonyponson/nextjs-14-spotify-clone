@@ -15,7 +15,7 @@ export default function Home() {
             <ListItem name='Liked Songs' href='likedsongs' />
           </div>
         </div>
-      </Header>
+      </Header> 
       <div className='mt-2 mb-7 px-4'>
         <div className='flex justify-between items-center'>
           <h1 className='text-white text2xl font-semibold'>Newest Songs</h1>
