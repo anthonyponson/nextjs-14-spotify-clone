@@ -32,4 +32,5 @@ export const MyUserContextProvider = (Props: Props) => {
   const user = useSupaUser
   const accessToken = session?.access_token ?? null
   const [isLoadingData, setIsLoadingData] = useState(false)
+  const [userDetails, setUserDetails] = useState<UserDetails | null>(null)
 }
