@@ -33,4 +33,6 @@ export const MyUserContextProvider = (Props: Props) => {
   const accessToken = session?.access_token ?? null
   const [isLoadingData, setIsLoadingData] = useState(false)
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null)
+  const [subscription, setSubscription] = useState<Subscription | null>(null)
+
 }
