@@ -12,7 +12,7 @@ type UserContextType = {
   accessToken: string | null
   user: User | null
   userDetails: UserDetails | null
-  isLoading: boolean
+  isLoading: boolean 
   subscription: Subscription | null
 }
 
@@ -35,4 +35,6 @@ export const MyUserContextProvider = (Props: Props) => {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null)
   const [subscription, setSubscription] = useState<Subscription | null>(null)
 
+  const getUserDetails = () => supabase.from('users').select('*').single()
+  const getSubcription = () => supabase.from('subcriptions').select('*, pricess,(*, products(*))')
 }
