@@ -16,7 +16,7 @@ type UserContextType = {
   subscription: Subscription | null
 }
 
-export const userContext = createContext<UserContextType | undefined>(undefined)
+export const UserContext = createContext<UserContextType | undefined>(undefined)
 
 export interface Props {
   [propName: string]: any
@@ -25,7 +25,7 @@ export interface Props {
 export const MyUserContextProvider = (Props: Props) => {
   const {
     session,
-    isLoading: isLoadinUser,
+    isLoading: isLoadingUser,
     supabaseClient: supabase,
   } = useSessionContext()
 
@@ -62,9 +62,20 @@ export const MyUserContextProvider = (Props: Props) => {
           setIsLoadingData(false)
         }
       )
-    }else if (!user && !isLoadinUser && !isLoadingData){
+    } else if (!user && !isLoadingUser && !isLoadingData) {
       setUserDetails(null)
       setSubscription(null)
     }
-  }, [user,isLoadinUser])
+  }, [user, isLoadingUser])
+
+  const value = {
+    accessToken,
+    user,
+    userDetails,
+    isLoading: isLoadingUser || isLoadingData,
+
+    subscription,
+  }
+
+  return <UserContext.Provider value={value} {...Props} />
 }
