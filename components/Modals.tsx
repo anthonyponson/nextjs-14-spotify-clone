@@ -17,8 +17,14 @@ const Modals: React.FC<ModalPprops> = ({
   description,
   children,
 }) => {
-  return <Dialog.Root>
-    
+  return <Dialog.Root
+  open={isOpen}
+  defaultOpen={isOpen}
+  onOpenChange={onChange}
+  >
+    <Dialog.DialogPortal>
+      
+    </Dialog.DialogPortal>
   </Dialog.Root>
 }
 export default Modals
