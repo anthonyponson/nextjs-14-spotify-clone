@@ -25,6 +25,16 @@ const Modals: React.FC<ModalPprops> = ({
             <Dialog.Title className="text-xl text-center font-bold">
               {title}
             </Dialog.Title>
+            <Dialog.Description className="mb-5 text-sm text-center leading-normal ">
+              {description}
+            </Dialog.Description>
+            <div>{children}</div>
+            <Dialog.Close asChild>
+              <button className="text-neutral-400 hover:text-neutral-200 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:outline-none">
+                {" "}
+                <IoMdClose />
+              </button>
+            </Dialog.Close>
           </Dialog.Content>
         </Dialog.Overlay>
       </Dialog.DialogPortal>
