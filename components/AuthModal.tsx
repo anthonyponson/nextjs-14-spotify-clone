@@ -23,7 +23,6 @@ const AuthModal = () => {
     }
   }
   return (
-    <div>
       <Modals
         title="Test Modal"
         description="Test discription"
@@ -47,7 +46,7 @@ const AuthModal = () => {
           }}
         />
       </Modals>
-    </div>
+
   )
 }
 
