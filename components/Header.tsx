@@ -10,13 +10,15 @@ import useAuthModal from "@/hooks/useAuthModal"
 
 interface HeaderProps {
   children: React.ReactNode
-  className?: string
+  className?: string 
 }
 
 const Header: React.FC<HeaderProps> = ({ children, className }) => {
   const authModal = useAuthModal()
   const router = useRouter()
 
+  {console.log(authModal.isOpen , 'sign in')}
+  
   const handleLogout = () => {
     //
   }
@@ -54,6 +56,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
               <div>
                 <Button onClick={authModal.onOpen} className="bg-transparent">
                   Sign Up
+                  
                 </Button>
               </div>
               <div>
@@ -62,6 +65,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                   className="bg-white px-6 py-2 text-black"
                 >
                   Log in 
+                 
                 </Button>
               </div>
             </>
