@@ -54,7 +54,10 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           <div className="flex justify-between items-center gap-x-4">
             <>
               <div>
-                <Button onClick={authModal.onOpen} className="bg-transparent">
+                <Button onClick={() => {
+                  console.log("Button clicked")
+                  authModal.onOpen()
+                }} className="bg-transparent">
                   Sign Up
                   
                 </Button>
