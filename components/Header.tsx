@@ -8,6 +8,8 @@ import { twMerge } from "tailwind-merge"
 import Button from "./Button"
 import useAuthModal from "@/hooks/useAuthModal"
 
+import { useSupabaseClient } from "@supabase/auth-helpers-react"
+
 interface HeaderProps {
   children: React.ReactNode
   className?: string 
@@ -16,6 +18,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ children, className }) => {
   const authModal = useAuthModal()
   const router = useRouter()
+const supabaseClient = useSupabaseClient()
 
   {console.log(authModal.isOpen , 'sign in')}
   
