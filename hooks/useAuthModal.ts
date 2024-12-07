@@ -8,8 +8,9 @@ interface AuthModalStore {
 
 const useAuthModal = create<AuthModalStore>((set) => ({
   isOpen: false,
-  onOpen: () => { console.log("onOpen called"); set({ isOpen: true })
-},
+  onOpen: () => {
+    set({ isOpen: true })
+  },
   onClose: () => set({ isOpen: false }),
 }))
 
