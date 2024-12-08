@@ -10,7 +10,7 @@ const Library = () => {
   const authModal = useAuthModal()
   const user = useUser()
 const onClick = () => {
-  if(user){
+  if(!user?.user){
     console.log(user,'user in')
     return authModal.onOpen()
   } 
