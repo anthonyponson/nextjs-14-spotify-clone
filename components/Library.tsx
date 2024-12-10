@@ -1,12 +1,14 @@
 'use client'
 
 import useAuthModal from '@/hooks/useAuthModal'
+import useUploadModal from '@/hooks/useUploadModal'
 import { useUser } from '@/hooks/useUser'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { TbPlaylist } from 'react-icons/tb'
 
 const Library = () => {
 
+  const uploadModal = useUploadModal()
   const authModal = useAuthModal()
   const user = useUser()
 const onClick = () => {
@@ -14,6 +16,8 @@ const onClick = () => {
     console.log(user,'user in')
     return authModal.onOpen()
   } 
+
+  return uploadModal.onOpen()
 }
   return (
     <>
@@ -25,9 +29,7 @@ const onClick = () => {
               Your Library
             </p>
           </div>
-         <button onClick={onClick}>
-          hdih
-         </button>
+         <AiOutlinePlus onClick={onClick} />
         </div>
         <div className='flex flex-col gap-y-2 mt-4 px-3'>
             List of songs
