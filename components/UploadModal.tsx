@@ -1,13 +1,23 @@
 "use client"
 
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
+import uniqid from "uniqid"
+import { FieldValues, set, SubmitHandler, useForm } from "react-hook-form"
+import { useUser } from "@/hooks/useUser"
 import useUploadModal from "@/hooks/useUploadModal"
 import Modals from "./Modals"
 import { useState } from "react"
 import Input from "./Input"
+import Button from "./Button"
+import toast from "react-hot-toast"
+import { useSupabaseClient } from "@supabase/auth-helpers-react"
+
 const UploadModal = () => {
-  const [isLoading, setIsloading] = useState()
+  const [isLoading, setIsloading] = useState(false)
   const uploadModal = useUploadModal()
+
+  const { user } = useUser()
+
+  const supabaseClient = useSupabaseClient()
 
   const { register, reset, handleSubmit } = useForm<FieldValues>({
     defaultValues: {
@@ -24,7 +34,60 @@ const UploadModal = () => {
     }
   }
 
-  const onSubmit: SubmitHandler<FieldValues> = async (values) => {}
+  const onSubmit: SubmitHandler<FieldValues> = async (values) => {
+    try {
+      setIsloading(true)
+      const imageFile = values.image?.[0]
+      const songFile = values.song?.[0]
+
+      if (!imageFile || !songFile || !user) {
+        return
+      }
+
+      const uniqueId = uniqid()
+
+      // upload Song
+
+      const {data: songData, error: songError} = await supabaseClient 
+      
+      .storage
+      .from('songs') 
+      .upload(`song-${values.title}-${uniqueId}`, songFile, {
+        cacheControl: "3600",
+        upsert: false,
+      })
+
+      if (songError) {
+        setIsloading(false)
+        return toast.error(' failed to upload song')
+      }
+      
+
+      // upload image
+
+      
+      const {data: imageData, error: imageError} = await supabaseClient 
+      
+      .storage
+      .from('images') 
+      .upload(`image-${values.title}-${uniqueId}`, imageFile, {
+        cacheControl: "3600",
+        upsert: false,
+      })
+
+      if (imageError) {
+        setIsloading(false)
+        return toast.error(' failed to upload image')
+      }
+
+
+
+    } catch (error) {
+      toast.error("something went wrong")
+    } finally {
+      setIsloading(false)
+    }
+  }
 
   return (
     <Modals
@@ -47,22 +110,33 @@ const UploadModal = () => {
           {...register("author", { required: true })}
           placeholder="Song author"
         />
-      </form>
 
-      <div>
-        
-        <div className="mb-1">
-        select a song file
+        <div>
+          <div className="mb-1">select a song file</div>
+          <Input
+            id="song"
+            type="file"
+            disabled={isLoading}
+            accept="mp3"
+            {...register("song", { required: true })}
+          />
         </div>
-        <Input
-          id="song"
-          type="file"
-          disabled={isLoading}
-          accept="mp3"
-          {...register("song", { required: true })}
-      
-        />
-      </div>
+
+        <div>
+          <div className="mb-1">select a Image</div>
+          <Input
+            id="image"
+            type="file"
+            disabled={isLoading}
+            accept="image/*"
+            {...register("image", { required: true })}
+          />
+        </div>
+
+        <Button disabled={isLoading} type="submit">
+          Create
+        </Button>
+      </form>
     </Modals>
   )
 }
