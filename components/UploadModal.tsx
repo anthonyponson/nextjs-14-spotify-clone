@@ -53,12 +53,12 @@ const UploadModal = () => {
       const uniqueID = uniqid()
       console.log(uniqueID)
       console.log(user)
-      console.log('song file ', songFile)
+      console.log('song file ', songFile.type)
 
       const { data: songData, error: songError } = await supabaseClient.storage
         .from("songs")
         .upload(`song-${values.title}-${uniqueID}`, songFile, {
-          cacheControl: "10",
+          cacheControl: "3600",
           upsert: false,
         })
 
@@ -137,7 +137,7 @@ const UploadModal = () => {
             id="song"
             type="file"
             disabled={isLoading}
-            accept="mp3"
+            accept="audio/*"
             {...register("song", { required: true })}
           />
         </div>
