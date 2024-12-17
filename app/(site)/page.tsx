@@ -5,7 +5,11 @@ import { cookies } from 'next/headers'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { createBrowserClient, createServerClient } from '@supabase/ssr'
 
+export const revalidate = 0
 export default function Home() {
+
+  
+  
   return (
     <div className='bg-neutral-900 h-full w-full rounded-lg overflow-hidden overflow-y-auto '>
       <Header>
