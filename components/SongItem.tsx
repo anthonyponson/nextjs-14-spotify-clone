@@ -7,14 +7,14 @@ import PlayButton from "./PlayButton"
 
 interface SongItemProps {
   data: Song
-  onclick: (id: string) => void
+  onClick: (id: string) => void
 }
-const SongItem: React.FC<SongItemProps> = ({ data, onclick }) => {
+const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
   const imagePath = useLoadImage(data)
 
   return (
     <div
-      onClick={() => onclick(data.id)}
+      onClick={() => onClick(data.id)}
       className="relative group flex flex-col items-center justify-center rounded-md overflow-hidden gap-x-4 bg-neutral-400/10 cursor-pointer hover:bg-neutral-400/20 transition p-4"
     >
       <div className="relative aspect-square w-full h-full rounded-md overflow-hidden">
