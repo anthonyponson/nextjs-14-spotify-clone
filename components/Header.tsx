@@ -16,7 +16,6 @@ import useAuthModal from "@/hooks/useAuthModal"
 
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
 import { useUser } from "@/hooks/useUser"
-import { DiVim } from "react-icons/di"
 import toast from "react-hot-toast"
 
 interface HeaderProps {
