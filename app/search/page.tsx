@@ -19,10 +19,8 @@ const Search = async ({ searchParams }: SearchProps) => {
         <div className="mt-2">
           <h2 className="text-2xl font-semibold">Search</h2>
           <SearchInput />
-          
         </div>
       </Header>
-
     </div>
   )
 }
