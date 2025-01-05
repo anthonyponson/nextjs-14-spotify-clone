@@ -10,6 +10,7 @@ interface LikeButtonProps {
 }
 
 const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
+  
   const router = useRouter()
 
   const { supabaseClient } = useSessionContext()
@@ -19,28 +20,29 @@ const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
   const [liked, setLiked] = useState(false)
 
   useEffect(() => {
-
     if (!user?.id) {
-      return 
+      return
     }
-      const fetchLiked = async () => {
-
-        const { data, error } = await supabaseClient
-          .from("liked_songs")
-          .select("*")
-          .eq("user_id", user.id)
-          .eq("song_id", songId)
-          .single()
-        if (!error &&data) {
-          setLiked(true)
-        }
+    const fetchLiked = async () => {
+      const { data, error } = await supabaseClient
+        .from("liked_songs")
+        .select("*")
+        .eq("user_id", user.id)
+        .eq("song_id", songId)
+        .single()
+      if (!error && data) {
+        setLiked(true)
       }
+    }
 
-      fetchLiked()
+    fetchLiked()
+  }, [songId, supabaseClient, user?.id])
 
-  }, [songId,supabaseClient, user?.id, ])
+  return <>
+  <button onClick={() =>{}}>
 
-  return <></>
+  </button>
+  </>
 }
 
 export default LikeButton
