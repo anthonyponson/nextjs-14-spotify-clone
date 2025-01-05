@@ -4,13 +4,14 @@ import { useUser } from "@/hooks/useUser"
 import { useSession, useSessionContext } from "@supabase/auth-helpers-react"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
+import { HiHeart } from "react-icons/hi"
 
 interface LikeButtonProps {
   songId: string
 }
 
 const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
-  
   const router = useRouter()
 
   const { supabaseClient } = useSessionContext()
@@ -25,11 +26,17 @@ const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
     }
     const fetchLiked = async () => {
       const { data, error } = await supabaseClient
+
         .from("liked_songs")
+
         .select("*")
+
         .eq("user_id", user.id)
+
         .eq("song_id", songId)
+
         .single()
+
       if (!error && data) {
         setLiked(true)
       }
@@ -38,11 +45,13 @@ const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
     fetchLiked()
   }, [songId, supabaseClient, user?.id])
 
-  return <>
-  <button onClick={() =>{}}>
+  const Icon = liked ? AiFillHeart : AiOutlineHeart
 
-  </button>
-  </>
+  return (
+    <>
+      <button onClick={() => {}}></button>
+    </>
+  )
 }
 
 export default LikeButton
