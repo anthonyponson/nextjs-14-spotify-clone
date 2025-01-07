@@ -2,7 +2,7 @@
 const Liked = () => {
   return (
     <>
-      <div>liked</div>
+      <div>liked songs</div>
     </>
   );
 }

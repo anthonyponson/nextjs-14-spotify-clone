@@ -6,6 +6,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 import { createBrowserClient, createServerClient } from "@supabase/ssr"
 import getSongs from "@/actions/getSongs"
 import PageContent from "./components/PageContent"
+import { Lilita_One } from "next/font/google"
 export const revalidate = 0
 export default async function Home() {
   const songs = await getSongs()
@@ -15,7 +16,7 @@ export default async function Home() {
         <div className="mt-2">
           <h2 className="text-2xl font-semibold">welcome back</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4">
-            <ListItem name="Liked Songs" href="likedsongs" />
+            <ListItem name="Liked Songs" href="/liked"  />
           </div>
         </div>
       </Header>
