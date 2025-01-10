@@ -28,6 +28,10 @@ export default async function Home() {
          <PageContent songs={songs} />
         </div>
       </div>
+
+      <footer>
+        hello
+      </footer>
     </div>
   )
 }
