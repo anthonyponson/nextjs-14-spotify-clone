@@ -21,6 +21,8 @@ const getLikedSongs = async (): Promise<Song[]> => {
   if (!data) {
     return []
   }
+
+  // this may look like spreading array but it's actually spreading realtion of songs
   return data.map((item) => ({ ...item.songs }))
 }
 
