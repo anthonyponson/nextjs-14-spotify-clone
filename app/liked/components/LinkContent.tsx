@@ -1,5 +1,6 @@
 "use client"
 
+import LikeButton from "@/components/LikeButton"
 import MediaItem from "@/components/MediaItem"
 import { useUser } from "@/hooks/useUser"
 import { Song } from "@/types/types"
@@ -20,13 +21,13 @@ const LinkContent: React.FC<LinkContentProps> = ({ songs }) => {
     }
   }, [isLoading, user, router])
 
-if(songs.length === 0){
-  return(
-    <div className="flex items-center justify-center h-1/2">
-      <p className="text-lg">No songs found</p>
-    </div>
-  )
-}
+  if (songs.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-1/2">
+        <p className="text-lg">No songs found</p>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -36,6 +37,7 @@ if(songs.length === 0){
             <div className="flex-1">
               <MediaItem onClick={() => {}} data={song} />
             </div>
+            <LikeButton songId={song.id} />
           </div>
         ))}
       </div>
