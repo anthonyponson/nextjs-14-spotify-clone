@@ -2,7 +2,7 @@ import { create } from "zustand"
 
 interface PlayerStore {
   ids: string[]
-  activId: string
+  activeId: string
   setId: (id: string) => void
   setIds: (ids: string[]) => void
   reset: () => void
@@ -10,10 +10,10 @@ interface PlayerStore {
 
 const usePlayer = create<PlayerStore>((set) => ({
   ids: [],
-  activId: "",
-  setId: (id: string) => set({ activId: id }),
+  activeId: "",
+  setId: (id: string) => set({ activeId: id }),
   setIds: (ids: string[]) => set({ ids }),
-  reset: () => set({ ids: [], activId: undefined }),
+  reset: () => set({ ids: [], activeId: undefined }),
 }))
 
 
