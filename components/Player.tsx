@@ -1,6 +1,7 @@
 'use client'
 
 import useGetSongById from "@/hooks/useGetSongById";
+import useLoadSong from "@/hooks/useLoadSong";
 import usePlayer from "@/hooks/userPlayer";
 
 const Player = () => {
@@ -9,10 +10,16 @@ const Player = () => {
   
   const {song} = useGetSongById(player.activeId)
 
+  const songUrl = useLoadSong(song!)
+
+
+  // if(!song || !songUrl || !player.activeId){
+  //   return null
+  // } 
     
   return (
     <>
-      <div> </div>
+      <div className="fixed bottom-0 bg-black w-full py-2 h-[80px] px-4"> </div>
     </>
   );
 }
