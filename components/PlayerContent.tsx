@@ -12,6 +12,7 @@ import {
 import { AiFillStepBackward } from "react-icons/ai"
 import Slider from "./Slider"
 import usePlayer from "@/hooks/userPlayer"
+import { useState } from "react"
 
 interface PlayerContentProps {
   song: Song
@@ -20,6 +21,9 @@ interface PlayerContentProps {
 
 const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   const player = usePlayer()
+  const [volume, setVolume] = useState(1)
+  const [ispPlaying, setIsPlaying] = useState(false)
+  const [isMuted, setIsMuted] = useState(false)
   const Icon = true ? BsPauseFill : BsPlayFill
   const VolumeIcon = true ? BsVolumeUpFill : BsVolumeMuteFill
   return (
