@@ -24,8 +24,17 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   const [volume, setVolume] = useState(1)
   const [ispPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
+
   const Icon = true ? BsPauseFill : BsPlayFill
+
   const VolumeIcon = true ? BsVolumeUpFill : BsVolumeMuteFill
+
+  const onPlay = () => {
+    if(player.ids.length === 0){
+      return
+    }
+  }
+
   return (
     <div className="grid grid-cols-3 md:grid-col-3 h-full">
       <div className="flex w-full justify-start">
