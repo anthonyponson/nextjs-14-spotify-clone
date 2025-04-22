@@ -9,7 +9,7 @@ import {
   BsVolumeMuteFill,
   BsVolumeUpFill,
 } from "react-icons/bs"
-import { AiFillStepBackward } from "react-icons/ai"
+import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai"
 import Slider from "./Slider"
 import usePlayer from "@/hooks/userPlayer"
 import { useState } from "react"
@@ -29,7 +29,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
 
   const VolumeIcon = true ? BsVolumeUpFill : BsVolumeMuteFill
 
-  const onPlay = () => {
+  const onPlayNext = () => {
     if(player.ids.length === 0){
       return
     }
@@ -39,6 +39,20 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
 
     if(!nextSong){
       return player.setId(player.ids[0])
+    }
+    
+  }
+
+  const onPlayPrevious = () => {
+    if(player.ids.length === 0){
+      return
+    }
+
+    const currentindex = player.ids.findIndex((id) => id === player.activeId)
+    const PreviousSong = player.ids[currentindex - 1]
+
+    if(!PreviousSong){
+      return player.setId(player.ids[player.ids.length - 1])
     }
     
   }
@@ -65,16 +79,16 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
         <AiFillStepBackward
           size={30}
           className="text-neutral-400 hover:text-white transition"
-          onClick={() => {}}
+          onClick={onPlayPrevious}
         />
         <div className="flex items-center justify-center h-10 w-10 rounded-full bg-white p-1 cursor-pointer">
           <Icon size={30} color="black" />
         </div>
 
-        <AiFillStepBackward
+        <AiFillStepForward
           size={30}
           className="text-neutral-400 hover:text-white transition"
-          onClick={() => {}}
+          onClick={onPlayNext}
         />
       </div>
 
