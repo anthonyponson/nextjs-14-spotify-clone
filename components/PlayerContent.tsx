@@ -13,6 +13,7 @@ import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai"
 import Slider from "./Slider"
 import usePlayer from "@/hooks/userPlayer"
 import { useState } from "react"
+import useSound from "use-sound"
 
 interface PlayerContentProps {
   song: Song
@@ -54,8 +55,32 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
     if(!PreviousSong){
       return player.setId(player.ids[player.ids.length - 1])
     }
+
+    player.setId(PreviousSong)
     
   }
+
+  const [play, { pause, sound }] = useSound(
+    songUrl,
+    {
+      volume: isMuted ? 0 : volume,
+      onplay: () => setIsPlaying(true),
+      onpause: () => setIsPlaying(false),
+      onend: () => {
+        if (player.ids.length === 0) {
+          return
+        }
+
+        const currentindex = player.ids.findIndex((id) => id === player.activeId)
+        const nextSong = player.ids[currentindex + 1]
+
+        if (!nextSong) {
+          return player.setId(player.ids[0])
+        }
+      },
+    }
+
+  )
 
   return (
     <div className="grid grid-cols-3 md:grid-col-3 h-full">
