@@ -12,7 +12,7 @@ import {
 import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai"
 import Slider from "./Slider"
 import usePlayer from "@/hooks/userPlayer"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import useSound from "use-sound"
 
 interface PlayerContentProps {
@@ -23,7 +23,7 @@ interface PlayerContentProps {
 const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   const player = usePlayer()
   const [volume, setVolume] = useState(1)
-  const [ispPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
 
   const Icon = true ? BsPauseFill : BsPlayFill
@@ -31,55 +31,69 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   const VolumeIcon = true ? BsVolumeUpFill : BsVolumeMuteFill
 
   const onPlayNext = () => {
-    if(player.ids.length === 0){
+    if (player.ids.length === 0) {
       return
     }
 
     const currentindex = player.ids.findIndex((id) => id === player.activeId)
     const nextSong = player.ids[currentindex + 1]
 
-    if(!nextSong){
+    if (!nextSong) {
       return player.setId(player.ids[0])
     }
-    
   }
 
   const onPlayPrevious = () => {
-    if(player.ids.length === 0){
+    if (player.ids.length === 0) {
       return
     }
 
     const currentindex = player.ids.findIndex((id) => id === player.activeId)
     const PreviousSong = player.ids[currentindex - 1]
 
-    if(!PreviousSong){
+    if (!PreviousSong) {
       return player.setId(player.ids[player.ids.length - 1])
     }
 
     player.setId(PreviousSong)
-    
   }
 
-  const [play, { pause, sound }] = useSound(
-    songUrl,
-    {
-     volume: volume,
-      onplay: () => {
-        setIsPlaying(true)
-      },
-      onpause: () => {
-        setIsPlaying(false)
-      },
-      onend: () => {
-        setIsPlaying(false)
-        onPlayNext()
-      },
-      onload: () => {
-        setVolume(1)
-      }
-    }
+  const [play, { pause, sound }] = useSound(songUrl, {
+    volume: volume,
+    onplay: () => setIsPlaying(true),
 
-  )
+    onend: () => {
+      setIsPlaying(false)
+      onPlayNext()
+    },
+    onpause: () => setIsPlaying(false),
+    formart: "mp3",
+  })
+
+  useEffect(() => {
+    sound?.play()
+    return () => {
+      sound?.unload()
+    }
+  }, [sound])
+
+  const handlePlay = () => {
+    if (!isPlaying) {
+      play()
+    } else {
+      pause()
+    }
+  }
+
+  const toggleMute = () => {
+   if(volume === 0 ){
+      setVolume(1)
+    }
+    else {
+      setVolume(0)
+    } 
+   }
+  
 
   return (
     <div className="grid grid-cols-3 md:grid-col-3 h-full">
@@ -119,7 +133,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
       <div className="hidden md:flex w-full justify-end pr-2">
         <div className="flex items-center gap-x-2 w-[120px]">
           <VolumeIcon onClick={() => {}} size={30} color="white" />
-            <Slider />
+          <Slider />
         </div>
       </div>
     </div>
