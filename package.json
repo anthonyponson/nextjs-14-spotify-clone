@@ -1,5 +1,5 @@
 {
-  "name": "nextjs14-spotify",
+  "name": "c",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -41,5 +41,17 @@
     "supabase": "^1.223.10",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "postcss.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthonyponson/nextjs-14-spotify-clone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anthonyponson/nextjs-14-spotify-clone/issues"
+  },
+  "homepage": "https://github.com/anthonyponson/nextjs-14-spotify-clone#readme"
 }
