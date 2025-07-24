@@ -29,9 +29,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <footer>
-        hello
-      </footer>
+      
     </div>
   )
 }

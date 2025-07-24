@@ -93,7 +93,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   }
 
   return (
-    <div className="grid grid-cols-3 md:grid-col-3 h-full">
+    <div className="grid grid-cols-3 md:grid-cols-3 h-full">
       <div className="flex w-full justify-start">
         <div className="flex items-center gap-x-4">
           <MediaItem data={song} />
